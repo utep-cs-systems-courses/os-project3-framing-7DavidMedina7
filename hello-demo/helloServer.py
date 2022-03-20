@@ -35,5 +35,6 @@ while True:
         time.sleep(0.25);       # delay 1/4s
         conn.send(b"world")
         conn.shutdown(socket.SHUT_WR)
+        sys.exit(0)
 
 
