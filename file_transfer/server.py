@@ -1,5 +1,7 @@
 import socket
+import os
 import threading
+from file_archiver import *
 
 
 PORT = 5050
@@ -26,7 +28,7 @@ def handle_client(connection, address):
     print(f"[NEW CONNECTION] {address} connected.")
 
     connected = True
-
+    file_counter = 0
     while connected:
         # Wait to receive information from the client
         # ~PROTOCOL~
@@ -37,13 +39,20 @@ def handle_client(connection, address):
         if message_length:
             # Converting the string length into a integer
             message_length = int(message_length)
+
             # Obtaining the actual message in a string
             message = connection.recv(message_length).decode(FORMAT)
+
+            # Un-archiving the file received
+            file_counter += 1
+            name_of_new_file = "RECEIVED_FILE" + "_" + "[" + str(address) + "]_" + str(file_counter) + ".txt"
+            unarchive_file(name_of_new_file, message)
+
             # Check if client is still connected to the server
             if message == DISCONNECT_MESSAGE:
                 connected = False
 
-            print(f"[{address}] {message}")
+            print(f"\n[{address}] {message}")
             connection.send("Message received.".encode(FORMAT))
     # Disconnect client from server
     connection.close()

@@ -1,0 +1,8 @@
+What's the difference between CNN and RNN?
+The main difference between a CNN and RNN is the ability to process temporal
+information - data that comes in sequences, such as a sentence. Recurrent
+neural networks are designed for this very purpose, while convolutional neural
+networks are incapable of effectively interpreting temporal information. As a
+result, CNNs and RNNs are used for completely distinct purposes, and there are
+differences in the structures of the neural networks themselves to fit those
+different use cases.
